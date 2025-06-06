@@ -1,0 +1,41 @@
+{% load static %}  <!-- Carga el sistema de archivos estáticos de Django -->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8"> <!-- Define la codificación del documento -->
+    <title>Predicción de Fuga de Clientes</title> <!-- Título del navegador -->
+
+    <!-- Conexión al archivo de estilos ubicado en static/prediccion/styles.css -->
+<link rel="stylesheet" href="{% static 'prediccion/styles.css' %}">
+
+<body>
+    <!-- Título principal de la página -->
+    <h1>Subí tu archivo CSV para predecir la fuga de clientes</h1>
+
+    <!-- Formulario para subir el archivo -->
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %} <!-- Token de seguridad de Django para formularios -->
+        
+        <!-- Campo para subir archivos CSV -->
+        <input type="file" name="archivo" accept=".csv" required>
+
+        <!-- Botón para enviar el formulario -->
+        <button type="submit">Predecir</button>
+    </form>
+
+    <!-- Si existen resultados renderizados en la vista -->
+    {% if resultados %}
+    <div class="resultados">
+        <h2>Resultados:</h2>
+        {{ resultados|safe }} <!-- Muestra el dataframe HTML generado -->
+    </div>
+
+    <!-- Si ocurrió un error (por ejemplo, archivo inválido o error del modelo) -->
+    {% elif error %}
+    <div class="resultados" style="background: #ffebee;">
+        <strong>{{ error }}</strong> <!-- Mensaje de error visible para el usuario -->
+    </div>
+    {% endif %}
+</body>
+</html>

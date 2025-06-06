@@ -1,0 +1,53 @@
+/* static/prediccion/styles.css */
+
+/* Estilos generales del cuerpo de la página */
+body {
+    font-family: 'Segoe UI', sans-serif; /* Fuente moderna y legible */
+    background-color: #f4f4f4;            /* Fondo gris claro para suavidad visual */
+    display: flex;                        /* Usamos flexbox para centrar */
+    flex-direction: column;              /* Dirección vertical del contenido */
+    align-items: center;                 /* Centramos horizontalmente */
+    justify-content: center;             /* Centramos verticalmente */
+    height: 100vh;                       /* Ocupa el 100% del alto de la ventana */
+    margin: 0;                           /* Quitamos márgenes por defecto */
+}
+
+/* Estilo para el título principal */
+h1 {
+    color: #333;                         /* Texto en gris oscuro para buena lectura */
+}
+
+/* Estilos para el formulario */
+form {
+    background: #fff;                    /* Fondo blanco para destacarse del fondo */
+    padding: 2rem;                       /* Espaciado interno generoso */
+    border-radius: 10px;                 /* Bordes redondeados suaves */
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);/* Sombra leve para efecto de elevación */
+    display: flex;                       /* Flexbox para organizar los elementos */
+    flex-direction: column;             /* Verticalmente uno debajo del otro */
+    gap: 1rem;                           /* Espacio entre los elementos */
+}
+
+/* Estilo para el input de carga de archivo */
+input[type="file"] {
+    padding: 0.5rem;                     /* Espaciado interior para mejor apariencia */
+}
+
+/* Estilos para el botón */
+button {
+    background-color: #4CAF50;          /* Verde tipo "Aceptar/Confirmar" */
+    color: white;                       /* Texto blanco para contraste */
+    border: none;                       /* Sin bordes por defecto */
+    padding: 0.75rem 1.5rem;            /* Espaciado interno del botón */
+    border-radius: 5px;                 /* Bordes suavemente redondeados */
+    cursor: pointer;                    /* Cursor tipo "mano" al pasar el mouse */
+}
+
+/* Estilo para el contenedor de resultados */
+.resultados {
+    margin-top: 1.5rem;                 /* Separación respecto al formulario */
+    background: #e8f5e9;                /* Verde muy claro para fondo suave */
+    padding: 1rem;                      /* Espaciado interno */
+    border-radius: 5px;                 /* Bordes redondeados */
+    max-width: 600px;                   /* Ancho máximo para mantener legibilidad */
+}

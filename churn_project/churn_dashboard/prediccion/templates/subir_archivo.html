@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Predicción de Fuga de Clientes</title>
+</head>
+<body>
+    <h1>Subí tu archivo CSV para predecir churn</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="archivo_csv" accept=".csv" required>
+        <button type="submit">Predecir</button>
+    </form>
+
+    {% if predicciones %}
+        <h2>Resultados de la predicción:</h2>
+        <ul>
+            {% for pred in predicciones %}
+                <li>{{ pred }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>

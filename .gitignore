@@ -1,0 +1,27 @@
+# Entornos virtuales
+venv/
+env/
+ENV/
+
+# Archivos de Python compilados
+__pycache__/
+*.py[cod]
+*.so
+
+# Archivos de log
+*.log
+
+# Archivos de modelo y datos
+*.pkl
+*.csv
+*.xls
+*.xlsx
+
+# Archivos del sistema y de editores
+.DS_Store
+*.swp
+*.swo
+*.idea/
+.vscode/
+
+
