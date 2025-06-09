@@ -1,41 +1,50 @@
-{% load static %}  <!-- Carga el sistema de archivos estáticos de Django -->
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8"> <!-- Define la codificación del documento -->
-    <title>Predicción de Fuga de Clientes</title> <!-- Título del navegador -->
-
-    <!-- Conexión al archivo de estilos ubicado en static/prediccion/styles.css -->
-<link rel="stylesheet" href="{% static 'prediccion/styles.css' %}">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Fuga de Clientes</title>
+    <link rel="stylesheet" href="{% static 'prediccion/styles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
 <body>
-    <!-- Título principal de la página -->
-    <h1>Subí tu archivo CSV para predecir la fuga de clientes</h1>
-
-    <!-- Formulario para subir el archivo -->
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %} <!-- Token de seguridad de Django para formularios -->
-        
-        <!-- Campo para subir archivos CSV -->
-        <input type="file" name="archivo" accept=".csv" required>
-
-        <!-- Botón para enviar el formulario -->
-        <button type="submit">Predecir</button>
-    </form>
-
-    <!-- Si existen resultados renderizados en la vista -->
-    {% if resultados %}
-    <div class="resultados">
-        <h2>Resultados:</h2>
-        {{ resultados|safe }} <!-- Muestra el dataframe HTML generado -->
-    </div>
-
-    <!-- Si ocurrió un error (por ejemplo, archivo inválido o error del modelo) -->
-    {% elif error %}
-    <div class="resultados" style="background: #ffebee;">
-        <strong>{{ error }}</strong> <!-- Mensaje de error visible para el usuario -->
-    </div>
-    {% endif %}
+<div class="dashboard">
+    <aside class="sidebar">
+        <div class="logo">Churn<span>AI</span></div>
+        <nav>
+            <ul>
+                <li class="active"><i class="fa-solid fa-chart-line"></i><span>Dashboard</span></li>
+                <li><i class="fa-solid fa-upload"></i><span>Cargar CSV</span></li>
+                <li><i class="fa-solid fa-table"></i><span>Resultados</span></li>
+            </ul>
+        </nav>
+    </aside>
+    <main class="content">
+        <h1>Predicción de Fuga de Clientes</h1>
+        <form method="post" enctype="multipart/form-data" class="upload-form">
+            {% csrf_token %}
+            <input type="file" name="archivo" accept=".csv" required>
+            <button type="submit">Predecir</button>
+        </form>
+        <div class="cards">
+            <div class="card"><canvas id="lineChart"></canvas></div>
+            <div class="card"><canvas id="pieChart"></canvas></div>
+            <div class="card"><canvas id="barChart"></canvas></div>
+        </div>
+        {% if resultados %}
+        <div class="resultados card">
+            <h2>Resultados</h2>
+            {{ resultados|safe }}
+        </div>
+        {% elif error %}
+        <div class="resultados card error">
+            <strong>{{ error }}</strong>
+        </div>
+        {% endif %}
+    </main>
+</div>
+<script src="{% static 'prediccion/scripts.js' %}"></script>
 </body>
 </html>
