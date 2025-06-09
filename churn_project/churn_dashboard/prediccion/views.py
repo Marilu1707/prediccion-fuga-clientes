@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 import pandas as pd
 import joblib
 import os
@@ -16,6 +17,12 @@ def home(request):
                 "error": "Por favor, subí un archivo CSV."
             })
 
+        # Validamos que la extensión sea .csv
+        if not archivo.name.lower().endswith('.csv'):
+            return render(request, "home.html", {
+                "error": "El archivo debe tener extensión .csv"
+            })
+
         try:
             # Leemos el CSV en un DataFrame de pandas
             df = pd.read_csv(archivo)
@@ -24,8 +31,8 @@ def home(request):
             # (evita errores al predecir)
             df = df.drop(columns=["CustomerID", "Churn"], errors="ignore")
 
-            # Definimos la ruta donde se encuentra el modelo previamente entrenado
-            modelo_path = os.path.join("modelo", "modelo_churn.pkl")
+            # Definimos la ruta absoluta del modelo previamente entrenado
+            modelo_path = os.path.join(settings.BASE_DIR, "modelo", "modelo_churn.pkl")
 
             # Verificamos que el archivo del modelo exista
             if not os.path.exists(modelo_path):

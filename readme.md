@@ -43,13 +43,7 @@ pip install -r requirements.txt
 
 ### 4. Verificar que el modelo exista
 
-Asegúrate de que el archivo del modelo esté ubicado en:
-
-```
-modelo/modelo_churn.pkl
-```
-
-Si no está, ejecutá el script para entrenarlo:
+La aplicación busca el modelo en la carpeta `modelo` ubicada en la raíz del proyecto. Si no existe `modelo/modelo_churn.pkl`, generalo ejecutando:
 
 ```bash
 python entrenar_modelo.py
